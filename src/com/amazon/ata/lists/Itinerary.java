@@ -2,6 +2,7 @@ package com.amazon.ata.lists;
 
 import com.amazon.ata.resources.lists.prework.Destination;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -10,6 +11,22 @@ import java.util.List;
  * and get the total number of days that will be spent in trip.
  */
 public class Itinerary {
+    private List<Destination> destinations;
+    private String location;
+    private int daysAtLocation;
+    private int totalDays;
+
+    public Itinerary() {
+        destinations = new ArrayList<>();
+    }
+
+    public Itinerary(String location, int daysAtLocation) {
+        destinations = new ArrayList<>();
+        this.location = location;
+        this.daysAtLocation = daysAtLocation;
+        this.totalDays += daysAtLocation;
+    }
+
     /**
      * Add a new destination to the end of itinerary.
      *
@@ -17,6 +34,8 @@ public class Itinerary {
      */
     public void addDestination(Destination destination) {
         // Implement the method here
+        destinations.add(destination);
+        totalDays += destination.getDaysAtLocation();
     }
 
     /**
@@ -27,7 +46,7 @@ public class Itinerary {
      */
     public Destination getDestination(int position) {
         // Implement the method here
-        return null;
+        return destinations.get(position);
     }
 
     /**
@@ -38,7 +57,8 @@ public class Itinerary {
      */
     public Destination removeDestination(int position) {
         // Implement the method here
-        return null;
+        Destination removedDestination = destinations.remove(position);
+        return removedDestination;
     }
 
 
@@ -50,7 +70,11 @@ public class Itinerary {
      */
     public List<String> getListOfLocations() {
         // Implement the method here
-        return null;
+        List<String> locations = new ArrayList<>();
+        for (int i = 0; i < destinations.size(); i++) {
+            locations.add(destinations.get(i).getLocation());
+        }
+        return locations;
     }
 
     /**
@@ -61,7 +85,7 @@ public class Itinerary {
      */
     public int getTotalNumberOfDays() {
         // Implement the method here
-        return -1;
+        return totalDays;
     }
 
     /**
@@ -71,6 +95,24 @@ public class Itinerary {
      */
     public int getNumberOfDestinations() {
         // Implement the method here
-        return -1;
+        return destinations.size();
+    }
+
+
+    // Getters
+    public List<Destination> getDestinations() {
+        return destinations;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public int getDaysAtLocation() {
+        return daysAtLocation;
+    }
+
+    public int getTotalDays() {
+        return totalDays;
     }
 }
